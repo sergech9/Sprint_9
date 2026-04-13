@@ -17,6 +17,9 @@ jobs:
       - name: Start Selenoid
         run: |
           docker compose up -d
+
+      - name: Pull Selenoid Chrome image
+        run: docker pull selenoid/chrome:128.0
           
       - name: Wait for Selenoid
         run: |
