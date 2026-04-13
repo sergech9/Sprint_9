@@ -38,15 +38,8 @@ class BasePage:
 
     def click_first_dropdown_item(self, locator):
         items = self.wait.until(
-            lambda d: d.find_elements(*locator)
-        )
-
-        if not items:
-            raise Exception("Dropdown items not found")
-
-        first = items[0]
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", first)
-        self.driver.execute_script("arguments[0].click();", first)
+            EC.visibility_of_all_elements_located(locator))
+        items[0].click()
 
     def upload_file(self, locator, file_path):
         element = WebDriverWait(self.driver, 10).until(
