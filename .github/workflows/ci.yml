@@ -16,8 +16,6 @@ jobs:
 
       - name: Start Selenoid
         run: |
-          # Создаем сеть, если она указана в твоем конфиге как внешняя, 
-          # либо docker-compose создаст её сам.
           docker-compose up -d
           
       - name: Wait for Selenoid
