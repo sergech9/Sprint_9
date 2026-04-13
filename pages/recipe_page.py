@@ -29,12 +29,7 @@ class RecipePage(BasePage):
         return self.is_displayed(RecipePageLocators.RECIPE_CARDS)
 
     def is_recipe_with_name_present(self, recipe_name):
-        cards = self.find_elements(RecipePageLocators.RECIPE_CARDS)
-        for card in cards:
-            if recipe_name in card.text:
-                return True
-        return False
+        titles = self.find_elements(RecipePageLocators.RECIPE_CARDS) 
+        return any(recipe_name in title.text for title in titles)
 
-    def open_recipes_page(self, url):
-        self.driver.get(url)
 

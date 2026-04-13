@@ -2,6 +2,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 class BasePage:
     def __init__(self, driver):
@@ -58,3 +60,15 @@ class BasePage:
             return self.is_visible(locator).is_displayed()
         except:
             return False
+
+    def wait_for_text_to_be_present(self, locator, text):
+        try:
+            self.wait.until(
+                EC.text_to_be_present_in_element(locator, text)
+            )
+            return True
+        except TimeoutException:
+            return False
+        
+    def refresh(self):
+        self.driver.refresh()
