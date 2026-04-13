@@ -3,6 +3,7 @@ from pages.login_page import LoginPage
 from pages.recipe_page import RecipePage
 from data.data import Data
 from urls import URLS
+import time
 
 
 class TestRecipe:
@@ -32,6 +33,7 @@ class TestRecipe:
         recipe_page.submit()
 
         recipe_page.open(URLS.RECIPES_URL)
+        time.sleep(10)
         recipe_page.refresh()
 
         assert recipe_page.is_recipe_card_present()
