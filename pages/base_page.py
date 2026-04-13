@@ -45,7 +45,6 @@ class BasePage:
             raise Exception("Dropdown items not found")
 
         first = items[0]
-
         self.driver.execute_script("arguments[0].scrollIntoView(true);", first)
         self.driver.execute_script("arguments[0].click();", first)
 
