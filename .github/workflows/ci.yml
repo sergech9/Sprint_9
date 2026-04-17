@@ -40,13 +40,6 @@ jobs:
           pytest --alluredir=allure-results
         continue-on-error: true
 
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: failure-screenshots
-          path: screenshots/
-
       - name: Build Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()

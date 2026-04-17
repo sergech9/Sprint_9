@@ -35,4 +35,5 @@ class TestRecipe:
         recipe_page.open(URLS.RECIPES_URL)
         
         assert recipe_page.is_recipe_card_present()
+        recipe_page.refresh()
         assert recipe_page.is_recipe_with_name_present(recipe_name)
