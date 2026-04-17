@@ -89,4 +89,5 @@ class BasePage:
             )
             return True
         except TimeoutException:
+            self.driver.refresh()
             return False
