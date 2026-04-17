@@ -53,3 +53,10 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: allure-history
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()  # Загружать только если тесты упали
+        with:
+          name: failure-screenshots
+          path: screenshots/
