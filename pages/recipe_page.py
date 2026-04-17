@@ -28,8 +28,5 @@ class RecipePage(BasePage):
     def is_recipe_card_present(self):
         return self.is_displayed(RecipePageLocators.RECIPE_CARDS)
 
-    def is_recipe_with_name_present(self, recipe_name):
-        titles = self.find_elements(RecipePageLocators.RECIPE_CARDS) 
-        return any(recipe_name in title.text for title in titles)
-
-
+    def is_recipe_with_name_present(self, name):
+        return self.wait_for_text_in_elements(RecipePageLocators.RECIPE_CARDS, name)

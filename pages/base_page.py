@@ -81,3 +81,12 @@ class BasePage:
         self.send_keys(input_locator, text)
         self.wait.until(EC.visibility_of_any_elements_located(item_locator))
         self.click(item_locator)
+
+    def wait_for_text_in_elements(self, locator, text):
+        try:
+            self.wait.until(
+                lambda driver: any(text in el.text for el in driver.find_elements(*locator))
+            )
+            return True
+        except TimeoutException:
+            return False
