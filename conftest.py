@@ -1,8 +1,5 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options 
-import allure
-import os
 
 @pytest.fixture
 def driver():
@@ -16,8 +13,6 @@ def driver():
     options.set_capability("browserName", "chrome")
     options.set_capability("browserVersion", "128.0")
     
-    #driver = webdriver.Chrome(options=options)
-
     driver = webdriver.Remote(command_executor=selenoid_url, options=options)
     yield driver
     driver.quit()
