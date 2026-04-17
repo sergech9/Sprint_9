@@ -76,12 +76,8 @@ class BasePage:
         self.driver.refresh()
 
     def select_from_dropdown(self, input_locator, item_locator, text):
-        """Метод для работы с капризными выпадающими списками"""
-        # 1. Кликаем в поле, чтобы оно ожило
+
         self.click(input_locator)
-        # 2. Печатаем текст
         self.send_keys(input_locator, text)
-        # 3. Ждем, пока в DOM появятся варианты выбора (хотя бы один)
         self.wait.until(EC.visibility_of_any_elements_located(item_locator))
-        # 4. Кликаем по первому варианту
         self.click(item_locator)
