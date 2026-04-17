@@ -13,7 +13,7 @@ class RecipePage(BasePage):
         self.send_keys(RecipePageLocators.COOKING_TIME, time)
 
     def add_ingredient(self, name, amount):
-        self.select_ingredient(RecipePageLocators.INGREDIENT_NAME, name)
+        self.text_input(RecipePageLocators.INGREDIENT_NAME, name)
         self.click_first_dropdown_item(RecipePageLocators.INGREDIENT_DROPDOWN_ITEM)
         self.send_keys(RecipePageLocators.INGREDIENT_AMOUNT, amount)
         self.click(RecipePageLocators.ADD_INGREDIENT_BUTTON)

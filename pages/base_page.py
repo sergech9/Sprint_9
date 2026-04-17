@@ -17,17 +17,19 @@ class BasePage:
         return self.wait.until(EC.visibility_of_element_located(locator))
 
     def click(self, locator):
-        self.find(locator).click()
+        self.wait.until(EC.element_to_be_clickable(locator)).click()
 
     def click_action(self, locator):
         element = self.find(locator)
         actions = ActionChains(self.driver)
         actions.move_to_element(element).click().perform()
 
-    def send_keys(self, locator, value):
-        self.find(locator).send_keys(value)
+    def send_keys(self, locator, text):
+        element = self.wait.until(EC.visibility_of_element_located(locator))
+        element.clear()
+        element.send_keys(text)
 
-    def select_ingredient(self, locator, text):
+    def text_input(self, locator, text):
         element = self.find(locator)
         actions = ActionChains(self.driver)
 
@@ -72,3 +74,14 @@ class BasePage:
         
     def refresh(self):
         self.driver.refresh()
+
+    def select_from_dropdown(self, input_locator, item_locator, text):
+        """Метод для работы с капризными выпадающими списками"""
+        # 1. Кликаем в поле, чтобы оно ожило
+        self.click(input_locator)
+        # 2. Печатаем текст
+        self.send_keys(input_locator, text)
+        # 3. Ждем, пока в DOM появятся варианты выбора (хотя бы один)
+        self.wait.until(EC.visibility_of_any_elements_located(item_locator))
+        # 4. Кликаем по первому варианту
+        self.click(item_locator)
